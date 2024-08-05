@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum A + B</title>
+</head>
+<body>
+    <h1>Calculate A + B</h1>
+    <form id="inputForm">
+        <label for="numberA">Enter Number A:</label>
+        <input type="number" id="numberA" name="numberA" required><br><br>
+        <label for="numberB">Enter Number B:</label>
+        <input type="number" id="numberB" name="numberB" required><br><br>
+        <input type="submit" value="Calculate">
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const A = document.getElementById('numberA').value;
+            const B = document.getElementById('numberB').value;
+            
+            try {
+                const response = await fetch('https://YOUR_FLASK_SERVER_URL/sum', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ A: Number(A), B: Number(B) })
+                });
+                const data = await response.json();
+                document.getElementById('result').innerText = 'The result is: ' + data.result;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
