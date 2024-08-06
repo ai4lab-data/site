@@ -6,7 +6,7 @@
         async function sendImage() {
             const fileInput = document.getElementById('imageInput');
             const file = fileInput.files[0];
-            const ngrokUrl = 'https://f0f5-34-27-7-70.ngrok-free.app/upload'; // Replace with your ngrok URL
+            const ngrokUrl = 'https://9622-34-23-40-183.ngrok-free.app/upload'; // Replace with your ngrok URL
 
             const formData = new FormData();
             formData.append('image', file);
@@ -36,7 +36,7 @@
                 document.getElementById('results').appendChild(originalImgElement);
 
                 // Display modified image with title
-                const modifiedImageUrl = 'YOUR_NGROK_URL/modified_images/' + result.new_filename;
+                const modifiedImageUrl = 'https://9622-34-23-40-183.ngrok-free.app/' + result.new_filename;
                 const modifiedImgElement = document.createElement('img');
                 modifiedImgElement.src = modifiedImageUrl;
                 modifiedImgElement.style.width = '200px'; 
