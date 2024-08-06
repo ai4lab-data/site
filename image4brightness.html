@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+    <script>
+        async function sendImage() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            const ngrokUrl = 'https://782b-35-231-58-7.ngrok-free.app/upload'; // Replace with your ngrok URL
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch(ngrokUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                document.getElementById('results').innerText = 
+                    `File Name: ${result.filename}\nSize: ${result.size} bytes`;
+            } catch (error) {
+                console.error('Error sending image:', error);
+                document.getElementById('results').innerText = 'Error occurred.';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="sendImage()">Upload</button>
+    <div id="results"></div>
+</body>
+</html>
