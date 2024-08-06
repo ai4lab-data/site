@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Data to Flask</title>
+    <script>
+        async function sendData() {
+            const A = document.getElementById("numA").value;
+            const B = document.getElementById("numB").value;
+            const fileInput = document.getElementById("imageInput");
+            const file = fileInput.files[0];
+            const ngrokUrl = "https://af7f-35-194-177-185.ngrok-free.app/sum"; // Replace with your actual ngrok URL
+
+            const formData = new FormData();
+            formData.append('A', A);
+            formData.append('B', B);
+            formData.append('imageInput', file);
+
+            try {
+                const response = await fetch(ngrokUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                document.getElementById("results").innerText = "Result: " + JSON.stringify(result);
+            } catch (error) {
+                console.error("Error sending data:", error);
+                document.getElementById("results").innerText = "Error occurred. Check console.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Send Data to Flask</h1>
+    <input type="number" id="numA" placeholder="Enter number A" required>
+    <input type="number" id="numB" placeholder="Enter number B" required>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="sendData()">Send Data</button>
+    <div id="results">Results: </div>
+</body>
+</html>
