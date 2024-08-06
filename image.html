@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Two Numbers</title>
+    <script>
+        async function sendData() {
+            const A = document.getElementById("numA").value;
+            const B = document.getElementById("numB").value;
+            const fileInput = document.getElementById("imageInput");
+            const ngrokUrl = "https://1b90-35-227-187-13.ngrok-free.app/sum"; // Replace with your actual ngrok URL
+
+            const formData = new FormData();
+            formData.append("A", Number(A));
+            formData.append("B", Number(B));
+            if (fileInput.files[0]) {
+                formData.append("image", fileInput.files[0]);
+            }
+
+            try {
+                const response = await fetch(ngrokUrl, {
+                    method: "POST",
+                    body: formData 
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                document.getElementById("results").innerText = "Result: " + result.C;
+            } catch (error) {
+                console.error("Error sending data:", error);
+                document.getElementById("results").innerText = "Error occurred. Check console.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Sum of Two Numbers</h1>
+    <input type="number" id="numA" placeholder="Enter number A" required>
+    <input type="number" id="numB" placeholder="Enter number B" required>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="sendData()">Calculate Sum</button>
+    <div id="results">Results: </div>
+</body>
+</html>
