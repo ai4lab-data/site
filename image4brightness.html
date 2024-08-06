@@ -4,37 +4,29 @@
     <title>Image Upload</title>
     <script>
         async function sendImage() {
-            const fileInput = document.getElementById('imageInput');
-            const file = fileInput.files[0];
-            const ngrokUrl = 'https://f0f5-34-27-7-70.ngrok-free.app/upload'; // Replace with your ngrok URL
+            // ... (rest of the JavaScript code remains the same)
 
-            const formData = new FormData();
-            formData.append('image', file);
+                // Display original image with title
+                const originalImageUrl = URL.createObjectURL(file);
+                const originalImgElement = document.createElement('img');
+                originalImgElement.src = originalImageUrl;
+                originalImgElement.style.width = '200px'; 
+                const originalTitle = document.createElement('p');
+                originalTitle.textContent = "Original Image";
+                document.getElementById('results').appendChild(originalTitle);
+                document.getElementById('results').appendChild(originalImgElement);
 
-            try {
-                const response = await fetch(ngrokUrl, {
-                    method: 'POST',
-                    body: formData
-                });
+                // Display modified image with title
+                const modifiedImageUrl = 'YOUR_NGROK_URL/modified_images/' + result.new_filename;
+                const modifiedImgElement = document.createElement('img');
+                modifiedImgElement.src = modifiedImageUrl;
+                modifiedImgElement.style.width = '200px'; 
+                const modifiedTitle = document.createElement('p');
+                modifiedTitle.textContent = "Modified Image";
+                document.getElementById('results').appendChild(modifiedTitle);
+                document.getElementById('results').appendChild(modifiedImgElement);
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                document.getElementById('results').innerText = 
-                    `File Name: ${result.filename}\nSize: ${result.size} bytes`;
-
-                // Display modified image
-                const modifiedImageUrl = 'https://f0f5-34-27-7-70.ngrok-free.app/modified_images/' + result.new_filename;
-                const imgElement = document.createElement('img');
-                imgElement.src = modifiedImageUrl;
-                document.getElementById('results').appendChild(imgElement);
-
-            } catch (error) {
-                console.error('Error sending image:', error);
-                document.getElementById('results').innerText = 'Error occurred.';
-            }
+            // ... (rest of the JavaScript code remains the same)
         }
     </script>
 </head>
