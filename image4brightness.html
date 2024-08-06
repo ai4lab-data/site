@@ -6,7 +6,7 @@
         async function sendImage() {
             const fileInput = document.getElementById('imageInput');
             const file = fileInput.files[0];
-            const ngrokUrl = 'https://492b-34-106-113-58.ngrok-free.app/upload'; // Replace with your ngrok URL
+            const ngrokUrl = 'YOUR_NGROK_URL/upload'; // Replace with your ngrok URL
 
             const formData = new FormData();
             formData.append('image', file);
@@ -24,6 +24,13 @@
                 const result = await response.json();
                 document.getElementById('results').innerText = 
                     `File Name: ${result.filename}\nSize: ${result.size} bytes`;
+
+                // Display modified image
+                const modifiedImageUrl = 'YOUR_NGROK_URL/modified_images/' + result.new_filename;
+                const imgElement = document.createElement('img');
+                imgElement.src = modifiedImageUrl;
+                document.getElementById('results').appendChild(imgElement);
+
             } catch (error) {
                 console.error('Error sending image:', error);
                 document.getElementById('results').innerText = 'Error occurred.';
