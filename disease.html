@@ -1,4 +1,4 @@
-n<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>String Concatenation</title>
@@ -14,7 +14,7 @@ n<!DOCTYPE html>
             const A = document.getElementById('inputA').value;
             const B = document.getElementById('inputB').value;
 
-            fetch('https://35f8-34-106-229-249.ngrok-free.app/sum', {  // Replace with your ngrok URL
+            fetch('https://a90f-34-123-55-33.ngrok-free.app/sum', {  // Replace with your ngrok URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ n<!DOCTYPE html>
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = "Result: " + response;
+                document.getElementById('result').innerText = "Result: " + data.result;
             })
             .catch(error => console.error(error));
         }
