@@ -1,42 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sum of Two Numbers</title>
-    <script>
-        async function sendData() {
-            const A = document.getElementById("numA").value;
-            const B = document.getElementById("numB").value;
-            const ngrokUrl = "https://3b82-34-69-135-148.ngrok-free.app/sum"; // Replace with your actual ngrok URL
-
-            try {
-                const response = await fetch(ngrokUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ A: Number(A), B: Number(B) })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                document.getElementById("results").innerText = "Result: " + result.C;
-            } catch (error) {
-                console.error("Error sending data:", error);
-                document.getElementById("results").innerText = "Error occurred. Check console.";
-            }
-        }
-    </script>
+    <title>String Concatenation</title>
 </head>
 <body>
-    <h1>Sum of Two Numbers</h1>
-    <input type="text" id="numA" placeholder="Enter text history and symptoms" required>
-    <input type="text" id="numB" placeholder="Enter text B : nothing" required>
-    <button onclick="sendData()">Calculate Sum</button>
-    <div id="results">Results: </div>
+    <input type="text" id="inputA" placeholder="Enter string A">
+    <input type="text" id="inputB" placeholder="Enter string B">
+    <button onclick="concatenate()">Concatenate</button>
+    <div id="result"></div>
+
+    <script>
+        function concatenate() {
+            const A = document.getElementById('inputA').value;
+            const B = document.getElementById('inputB').value;
+
+            fetch('YOUR_NGROK_URL/concatenate', {  // Replace with your ngrok URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ A: A, B: B })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = "Result: " + data.result;
+            })
+            .catch(error => console.error(error));
+        }
+    </script>
 </body>
 </html>
