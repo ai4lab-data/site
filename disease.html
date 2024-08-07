@@ -23,7 +23,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = "Result: " + data.result + data.C + result.C;
+                document.getElementById('result').innerText = "Result: " + data.result + data.C + result.C + result;
             })
             .catch(error => console.error(error));
         }
