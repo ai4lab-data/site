@@ -23,7 +23,7 @@
             })
             .then(const result = await response.json())
             .then(data => {
-                document.getElementById('result').innerText = "Result: " + data.result + data.C + result.C + result + C;
+                document.getElementById('results').innerText = "Result: " + data.result + data.C + result.C + result + C;
             })
             .catch(error => console.error(error));
         }
