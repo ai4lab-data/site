@@ -21,12 +21,12 @@
                 },
                 body: JSON.stringify({ A: A, B: B })
             })
-            .then(response => response.json())
+            .then(const result = await response.json())
             .then(data => {
-                document.getElementById('result').innerText = "Result: " + data.result + data.C + result.C + result;
+                document.getElementById('result').innerText = "Result: " + data.result + data.C + result.C + result + C;
             })
             .catch(error => console.error(error));
         }
     </script>
 </body>
-</html>
+</html> 
